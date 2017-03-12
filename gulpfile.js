@@ -23,7 +23,7 @@ gulp.task('zip-app', function() {
 );
 /* Archire vendor scripts application */
 gulp.task('zip-vendor', function() {
-  gulp.src('b_components/*')
+  gulp.src('b_components/**/*')
     .pipe(zip('vendor-includes.zip'))
     .pipe(gulp.dest('build'))
   }
