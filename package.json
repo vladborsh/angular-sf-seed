@@ -8,7 +8,8 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-webserver": "^0.9.1"
+    "gulp-webserver": "^0.9.1",
+    "gulp-zip": "^4.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

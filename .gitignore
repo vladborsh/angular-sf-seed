@@ -1,5 +1,5 @@
 node_modules
 b_components
-client/vendor
+build
 *.log
 *.zip

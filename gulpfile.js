@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var webserver = require('gulp-webserver');
+var zip = require('gulp-zip');
  
 gulp.task('webserver', function() {
   gulp.src('app')
@@ -13,4 +14,20 @@ gulp.task('webserver', function() {
       https: true
     }));
 });
+
+ 
+gulp.task('zip-app', function() {
+  gulp.src('app/*')
+    .pipe(zip('client-includes.zip'))
+    .pipe(gulp.dest('build'))
+  }
+);
+
+gulp.task('zip-vendor', function() {
+  gulp.src('b_components/*')
+    .pipe(zip('vendor-includes.zip'))
+    .pipe(gulp.dest('build'))
+  }
+);
+
 gulp.task('default', [ 'webserver']);
