@@ -1,0 +1,27 @@
+{
+  "name": "Angular Seed",
+  "version": "1.0.0",
+  "description": "Angular Seed for Salesforce",
+  "main": "core.js",
+  "dependencies": {
+    "angular-cookies": "^1.6.2",
+    "angular-ui-bootstrap": "^2.2.0",
+    "spa-server": "^1.0.0"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-webserver": "^0.9.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/vladborsh/angular-sf-seed.git"
+  },
+  "keywords": [
+    "lumos"
+  ],
+  "author": "Vlad Borsh",
+  "license": "ISC"
+}
