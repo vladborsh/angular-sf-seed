@@ -1,6 +1,6 @@
 {
-  "name": "lms",
-  "description": "simple to use lms system",
+  "name": "angular-seed",
+  "description": "simple to use seed",
   "main": "server.js",
   "authors": [
     "Vlad Borsh"
@@ -9,7 +9,7 @@
   "keywords": [
     "lms"
   ],
-  "homepage": "https://github.com/choogayster/lms",
+  "homepage": "https://github.com/vladborsh/angular-sf-seed.git",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -20,11 +20,11 @@
   "dependencies": {
     "angular": "^1.6.1",
     "angular-ui-router": "^0.4.2",
+    "angular-animate": "^1.6.1",
+    "angular-cookies": "^1.6.1",
     "bootstrap": "^3.3.7",
     "angular-bootstrap": "^2.4.0",
     "font-awesome": "fontawesome#^4.7.0",
-    "angular-animate": "^1.6.1",
-    "angular-cookies": "^1.6.1",
     "lodash": "^4.17.4"
   },
   "directory": "client/"
