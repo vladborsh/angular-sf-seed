@@ -30,7 +30,7 @@ function BananaCtrl (
   function init () {
     vm.utils.loading = true;
     vm.utils.alerts = [];
-    BananaSrv.getAllBannas({})
+    BananaSrv.getAllBananas({})
     .then(
       function (data) {
         vm.model.bananas = data.items;

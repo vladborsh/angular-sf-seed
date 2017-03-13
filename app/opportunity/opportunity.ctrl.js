@@ -31,7 +31,7 @@ function OpportunityCtrl (
     vm.utils.loading = true;
     vm.utils.alerts = [];
     $q.all({
-      'bananas'       : BananaSrv.getAllBannas({}),
+      'bananas'       : BananaSrv.getAllBananas({}),
       'opportunities' : OpportunitySrv.getAllOpportunities({})
     }).then(
       function(data){
