@@ -1,6 +1,6 @@
 # Angular Seed Project
 
-Easy to install and boot front-end part of Salesforce-Anglar application
+Easy to install and boot front-end part of Salesforce-Angular application
 
 ## Instalation
 
