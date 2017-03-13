@@ -5,7 +5,7 @@ function Config($stateProvider, $urlRouterProvider) {
 
   $stateProvider
   .state('banana', {
-    url: '/',
+    url: '/banana',
     views: {
       "main": {
         templateUrl: "Banana.html",
@@ -14,8 +14,17 @@ function Config($stateProvider, $urlRouterProvider) {
       }
     }            
   })
-  /* other states */
-  $urlRouterProvider.otherwise('/');
+  .state('banana', {
+    url: '/opportunities',
+    views: {
+      "main": {
+        templateUrl: "Opportunity.html",
+        controller: 'OpportunityCtrl',
+        controllerAs: 'vm'
+      }
+    }            
+  })
+  $urlRouterProvider.otherwise('/banana');
 };
 
 angular.module('App').config(Config);

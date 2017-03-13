@@ -21,7 +21,7 @@ function BananaFct() {
 		setModel : function(_model) {
 			model = _model;
 		}
-	}
-}
+	};
+};
 
-angular.module('App').service('BananaFct', BananaFct); 
+angular.module('App').factory('BananaFct', BananaFct); 
