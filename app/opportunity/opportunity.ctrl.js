@@ -1,4 +1,5 @@
 OpportunityCtrl.$inject = [
+  'GeneralFct',
   'OpportunitySrv', 
   'OpportunityFct', 
   '$scope', 
@@ -6,6 +7,7 @@ OpportunityCtrl.$inject = [
   '$q'];
 
 function OpportunityCtrl (
+  GeneralFct,
   OpportunitySrv, 
   OpportunityFct,
   $scope, 

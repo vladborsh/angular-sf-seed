@@ -1,4 +1,5 @@
 BananaCtrl.$inject = [
+  'GeneralFct',
   'BananaSrv',
   'OpportunitySrv',
   'BananaFct', 
@@ -6,6 +7,7 @@ BananaCtrl.$inject = [
   '$timeout'];
 
 function BananaCtrl (
+  GeneralFct,
   BananaSrv,
   OpportunitySrv, 
   BananaFct, 
