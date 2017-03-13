@@ -14,7 +14,7 @@ function Config($stateProvider, $urlRouterProvider) {
       }
     }            
   })
-  .state('banana', {
+  .state('opportunity', {
     url: '/opportunities',
     views: {
       "main": {

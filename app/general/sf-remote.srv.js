@@ -1,6 +1,6 @@
-SfRemote.$inject = ['$q', '$cookies', '$log'];
+SfRemote.$inject = ['$q', '$log'];
 
-function SfRemote($q, $cookies, $log) {
+function SfRemote($q, $log) {
 
   /* Explicit remote method invocation */
   this.do = function(name, arg) {

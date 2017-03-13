@@ -1,22 +1,61 @@
-BananaCtrl.$inject = ['BananaSrv', 'BananaFct', '$scope', '$timeout'];
+BananaCtrl.$inject = [
+	'BananaSrv',
+	'OpportunitySrv',
+	'BananaFct', 
+	'$scope', 
+	'$timeout'];
 
-function BananaCtrl (BananaSrv, BananaFct, $scope, $timeout) {
+function BananaCtrl (
+	BananaSrv,
+	OpportunitySrv, 
+	BananaFct, 
+	$scope, 
+	$timeout) {
 
 	var vm = this;
 
 	vm.model = {
-		_BananaFct : BananaFct.getModel()
+		_BananaFct 		: BananaFct.getModel(),
+		bananas 			: [],
+		opportunities : []
 	};
 
 	vm.utils = {
-		alerts : []
+		alerts 	: [],
+		loading : false
 	};
 
-	vm.init();
+	init();
 
-	vm.init = function() {
-		
+	function init () {
+		vm.utils.loading = true;
+		vm.utils.alerts = [];
+		BananaSrv.getAllBannas({})
+		.then(
+			function (data) {
+				vm.model.bananas = data.items;
+				return OpportunitySrv.getAllOpportunities({})
+			}
+		).then(
+			function (data) {
+				vm.model.opportunities = data.items;
+				vm.utils.loading = false;
+			}
+		).catch(
+			function (err) {
+				vm.utils.loading = false;
+				if (err.type) {
+					vm.utils.alerts.push(err);
+				} else {
+					vm.utils.alerts.push({type:'danger', msg: err.message});
+				}
+			}
+		);
 	};
+
+	vm.doStuff = function() {
+		/* Some stuff */
+	}
 
 };
 

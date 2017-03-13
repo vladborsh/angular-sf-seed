@@ -2,8 +2,8 @@ OpportunitySrv.$inject = ['SfRemote'];
 
 function OpportunitySrv (SfRemote) {
 
-	this.getAllOpportunities = function() {
-		return SfRemote.do('FruitsCtrl.getAllOpportunities');
+	this.getAllOpportunities = function(arg) {
+		return SfRemote.do('FruitsCtrl.getAllOpportunities', arg);
 	};
 
 };
