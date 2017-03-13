@@ -1,61 +1,61 @@
 BananaCtrl.$inject = [
-	'BananaSrv',
-	'OpportunitySrv',
-	'BananaFct', 
-	'$scope', 
-	'$timeout'];
+  'BananaSrv',
+  'OpportunitySrv',
+  'BananaFct', 
+  '$scope', 
+  '$timeout'];
 
 function BananaCtrl (
-	BananaSrv,
-	OpportunitySrv, 
-	BananaFct, 
-	$scope, 
-	$timeout) {
+  BananaSrv,
+  OpportunitySrv, 
+  BananaFct, 
+  $scope, 
+  $timeout) {
 
-	var vm = this;
+  var vm = this;
 
-	vm.model = {
-		_BananaFct 		: BananaFct.getModel(),
-		bananas 			: [],
-		opportunities : []
-	};
+  vm.model = {
+    _BananaFct    : BananaFct.getModel(),
+    bananas       : [],
+    opportunities : []
+  };
 
-	vm.utils = {
-		alerts 	: [],
-		loading : false
-	};
+  vm.utils = {
+    alerts  : [],
+    loading : false
+  };
 
-	init();
+  init();
 
-	function init () {
-		vm.utils.loading = true;
-		vm.utils.alerts = [];
-		BananaSrv.getAllBannas({})
-		.then(
-			function (data) {
-				vm.model.bananas = data.items;
-				return OpportunitySrv.getAllOpportunities({})
-			}
-		).then(
-			function (data) {
-				vm.model.opportunities = data.items;
-				vm.utils.loading = false;
-			}
-		).catch(
-			function (err) {
-				vm.utils.loading = false;
-				if (err.type) {
-					vm.utils.alerts.push(err);
-				} else {
-					vm.utils.alerts.push({type:'danger', msg: err.message});
-				}
-			}
-		);
-	};
+  function init () {
+    vm.utils.loading = true;
+    vm.utils.alerts = [];
+    BananaSrv.getAllBannas({})
+    .then(
+      function (data) {
+        vm.model.bananas = data.items;
+        return OpportunitySrv.getAllOpportunities({})
+      }
+    ).then(
+      function (data) {
+        vm.model.opportunities = data.items;
+        vm.utils.loading = false;
+      }
+    ).catch(
+      function (err) {
+        vm.utils.loading = false;
+        if (err.type) {
+          vm.utils.alerts.push(err);
+        } else {
+          vm.utils.alerts.push({type:'danger', msg: err.message});
+        }
+      }
+    );
+  };
 
-	vm.doStuff = function() {
-		/* Some stuff */
-	}
+  vm.doStuff = function() {
+    /* Some stuff */
+  }
 
 };
 
