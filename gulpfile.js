@@ -16,7 +16,7 @@ gulp.task('webserver', function() {
 });
 /* Archire application */
 gulp.task('zip-app', function() {
-  gulp.src('app/*')
+  gulp.src('app/**/*')
     .pipe(zip('client-includes.zip'))
     .pipe(gulp.dest('build'))
   }
