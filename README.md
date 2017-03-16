@@ -9,6 +9,8 @@ Before instalation make sure that you have pre-installed Git and node.js. Just o
 ```
 git clone https://github.com/vladborsh/angular-sf-seed.git
 
+cd angular-sf-seed
+
 npm install -g bower
 
 npm install
