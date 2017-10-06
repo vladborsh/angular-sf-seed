@@ -3,12 +3,12 @@ var webserver = require('gulp-webserver');
 var zip = require('gulp-zip');
 /* Run server */
 gulp.task('webserver', function() {
-  gulp.src('app')
+  gulp.src('dest')
     .pipe(webserver({
       livereload: true,
       directoryListing: {
       	enable: true,
-        path:   'app'
+        path:   'dest'
       },
       open: true,
       https: true

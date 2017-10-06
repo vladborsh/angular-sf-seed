@@ -1,5 +1,4 @@
 node_modules
-b_components
-build
+dest
 *.log
 *.zip
