@@ -1,4 +1,5 @@
 const path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './public/app.js',
@@ -8,7 +9,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'babel-loader', query: { presets: ['es2015'] } }
+      { test: /\.js$/, loader: 'babel-loader', query: { presets: ['es2015'] } },
       { test: /\.html$/, loader: 'raw' },
       { test: /\.(scss|sass)$/, loader: 'style!css!sass' },
       { test: /\.css$/, loader: 'style!css' }
@@ -17,5 +18,6 @@ module.exports = {
   stats: {
     colors: true
   },
+  plugins: [new HtmlWebpackPlugin()],
   devtool: 'source-map'
 };

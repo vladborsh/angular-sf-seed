@@ -4,6 +4,7 @@ import TestComponent from './test.component';
 import TestTemplate from './test.html';
 
 describe('Test', () => {
+  console.log('WE here! ')
   let $rootScope, makeController;
 
   beforeEach(window.module(TestModule));
