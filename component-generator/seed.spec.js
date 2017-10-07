@@ -1,16 +1,16 @@
-import <%= name %>Module from './<%= name %>';
-import <%= name %>Controller from './<%= name %>.controller';
-import <%= name %>Component from './<%= name %>.component';
-import <%= name %>Template from './<%= name %>.html';
+import <%= upCaseName %>Module from './<%= name %>';
+import <%= upCaseName %>Controller from './<%= name %>.controller';
+import <%= upCaseName %>Component from './<%= name %>.component';
+import <%= upCaseName %>Template from './<%= name %>.html';
 
-describe('<%= name %>', () => {
+describe('<%= upCaseName %>', () => {
   let $rootScope, makeController;
 
-  beforeEach(window.module(<%= name %>Module));
+  beforeEach(window.module(<%= upCaseName %>Module));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {
-      return new <%= name %>Controller();
+      return new <%= upCaseName %>Controller();
     };
   }));
 
@@ -19,31 +19,18 @@ describe('<%= name %>', () => {
   });
 
   describe('Controller', () => {
-    // controller specs
-    it('has a name property [REMOVE]', () => { // erase if removing this.name from the controller
+    it('invokes init method [REMOVE]', () => {
       let controller = makeController();
-      expect(controller).to.have.property('name');
-    });
-  });
-
-  describe('Template', () => {
-    // template specs
-    // tip: use regex to ensure correct bindings are used e.g., {{  }}
-    it('has name in template [REMOVE]', () => {
-      expect(<%= name %>Template).to.match(/{{\s?\$ctrl\.name\s?}}/g);
     });
   });
 
   describe('Component', () => {
-    // component/directive specs
-    let component = <%= name %>Component;
-
+    let component = <%= upCaseName %>Component;
     it('includes the intended template', () => {
-      expect(component.template).to.equal(<%= name %>Template);
+      expect(component.template).to.equal(<%= upCaseName %>Template);
     });
-
     it('invokes the right controller', () => {
-      expect(component.controller).to.equal(<%= name %>Controller);
+      expect(component.controller).to.equal(<%= upCaseName %>Controller);
     });
   });
 });

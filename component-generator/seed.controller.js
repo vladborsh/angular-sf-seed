@@ -1,9 +1,22 @@
-class <%= name %>Controller {
+/**
+ * <%= upCaseName %> Controller does some sick stuff
+ */
+class <%= upCaseName %>Controller {
+  
   constructor() {
     this.init();
   }
+
+  /**
+   * <%= upCaseName %> Controller initialization util method
+   */
+  init() {
+
+  }
+
 }
-<%= name %>Controller.$inject = [];
+
+<%= upCaseName %>Controller.$inject = [];
 
 export default <%= name %>Controller
 
