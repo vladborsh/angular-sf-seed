@@ -6,8 +6,10 @@ import template        from 'gulp-template';
 import yargs           from 'yargs';
 import path            from 'path';
 import fs              from 'fs';
+import archiver              from 'archiver';
 import { inject, cap } from './gulp/component';
 import log             from './gulp/log';
+import DeploymentService from './gulp/deploy';
 
 /* Run server */
 gulp.task('webserver', function() {
@@ -46,7 +48,7 @@ gulp.task('component', () => {
   inject(name)
   .then(
     () => {
-      return gulp.src(path.join(__dirname, '', 'component-generator/**/*.**'))
+      return gulp.src(path.join(__dirname, '', 'generator/component/**/*.**'))
         .pipe(template({
           name: name,
           upCaseName: cap(name)
@@ -57,6 +59,13 @@ gulp.task('component', () => {
         .pipe(gulp.dest(destPath));
     }
   )
+});
+
+gulp.task('zip', function() {
+  let srv = new DeploymentService( fs, archiver, log );
+  srv.createFolderStructure()
+    .then( () => { srv.zipBundles() } )
+
 });
 
 /* Run server on default */

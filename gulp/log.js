@@ -1,3 +1,3 @@
-const log = () => console.log();
+const log = (val) => console.log(val);
 
 export default log;
