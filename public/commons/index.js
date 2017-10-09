@@ -4,9 +4,9 @@
 import angular from 'angular';
 import SfService from './sf.service';
 
-let componentsModule = angular.module('App.Commons');
+let componentsModule = angular.module('App.Commons', []).name;
 
-componentsModule
+angular.module('App.Commons')
   .service('SfService', SfService)
 
 
