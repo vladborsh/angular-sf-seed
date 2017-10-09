@@ -25,22 +25,6 @@ gulp.task('webserver', function() {
     }));
 });
 
-/* Archire application */
-gulp.task('zip-app', function() {
-  gulp.src('app/**/*')
-    .pipe(zip('client-includes.zip'))
-    .pipe(gulp.dest('build'))
-  }
-);
-
-/* Archire vendor scripts application */
-gulp.task('zip-vendor', function() {
-  gulp.src('b_components/**/*')
-    .pipe(zip('vendor-includes.zip'))
-    .pipe(gulp.dest('build'))
-  }
-);
-
 gulp.task('component', () => {
   const name = yargs.argv.name;
   const parentPath = yargs.argv.parent || '';
@@ -64,8 +48,9 @@ gulp.task('component', () => {
 gulp.task('zip', function() {
   let srv = new DeploymentService( fs, archiver, log );
   srv.createFolderStructure()
-    .then( () => { srv.zipBundles() } )
-
+    .then( srv.zipBundles )
+    .then( srv.zipNewPackage )
+    .then( srv.removeFolderStructure )
 });
 
 /* Run server on default */
