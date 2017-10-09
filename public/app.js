@@ -5,11 +5,14 @@ import ngCookies   from 'angular-cookies';
 import uiRouter    from 'angular-ui-router';
 import Config      from './app.config';
 import Components  from './components';
+import Commons  from './commons';
 
 
 angular.module('App', [
   ngAnimate, 
   ngBootstrap, 
   ngCookies,
-  uiRouter
+  uiRouter,
+  Components,
+  Commons
 ]).config( Config )
