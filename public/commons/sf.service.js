@@ -1,12 +1,11 @@
-import angular from 'angular';
-
 class SfService {
 
-  constructor() {}
+  constructor( $q ) {}
 
   do( methodName ) {
+    const deffered = $q.defer();
     let args = [ methodName ];
-    for (var i = 1; i < arguments.length; i++) args.push(arguments[i]);
+    for (let i = 1; i < arguments.length; i++) args.push(arguments[i]);
     args.push(
       ( result, event ) => {
         if(event.status){
@@ -18,9 +17,12 @@ class SfService {
     )
     args.push( { buffer: false, escape :false, timeout: 30000 } );
     console.log(args)
-    window.Visualforce.remoting.Manager.invokeAction.apply( Visualforce.remoting.Manager, args );
+    window.Visualforce.remoting.Manager.invokeAction.apply( window.Visualforce.remoting.Manager, args );
+    return deffered.promise;
   }
 
 }
+
+SfService.inject = [ '$q' ];
 
 export default SfService;
