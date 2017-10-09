@@ -27,10 +27,10 @@ describe('<%= upCaseName %>', () => {
   describe('Component', () => {
     let component = <%= upCaseName %>Component;
     it('includes the intended template', () => {
-      expect(component.template).to.equal(<%= upCaseName %>Template);
+      expect(component.template).toEqual(<%= upCaseName %>Template);
     });
     it('invokes the right controller', () => {
-      expect(component.controller).to.equal(<%= upCaseName %>Controller);
+      expect(component.controller).toEqual(<%= upCaseName %>Controller);
     });
   });
 });

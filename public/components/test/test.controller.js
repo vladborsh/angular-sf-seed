@@ -18,5 +18,5 @@ class TestController {
 
 TestController.$inject = [];
 
-export default testController
+export default TestController
 

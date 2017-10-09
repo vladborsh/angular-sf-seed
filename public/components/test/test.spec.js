@@ -4,7 +4,6 @@ import TestComponent from './test.component';
 import TestTemplate from './test.html';
 
 describe('Test', () => {
-  console.log('WE here! ')
   let $rootScope, makeController;
 
   beforeEach(window.module(TestModule));
@@ -28,10 +27,10 @@ describe('Test', () => {
   describe('Component', () => {
     let component = TestComponent;
     it('includes the intended template', () => {
-      expect(component.template).to.equal(TestTemplate);
+      expect(component.template).toEqual(TestTemplate);
     });
     it('invokes the right controller', () => {
-      expect(component.controller).to.equal(TestController);
+      expect(component.controller).toEqual(TestController);
     });
   });
 });

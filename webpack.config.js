@@ -9,9 +9,9 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'babel-loader', query: { presets: ['es2015'] } },
-      { test: /\.html$/, loader: 'raw' },
-      { test: /\.(scss|sass)$/, loader: 'style!css!sass' },
+      { test: /\.js/, exclude: [/app\/lib/, /node_modules/], loader: 'babel-loader' },
+      { test: /\.html$/, loader: 'raw-loader' },
+      { test: /\.(scss|sass)$/, loader: 'sass-loader' },
       { test: /\.css$/, loader: 'style!css' }
     ]
   },
