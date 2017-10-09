@@ -1,18 +1,19 @@
-import gulp            from 'gulp';
-import webserver       from 'gulp-webserver';
-import zip             from 'gulp-zip';
-import rename          from 'gulp-rename';
-import template        from 'gulp-template';
-import yargs           from 'yargs';
-import path            from 'path';
-import fs              from 'fs';
-import archiver              from 'archiver';
-import { inject, cap } from './gulp/component';
-import log             from './gulp/log';
+import gulp              from 'gulp';
+import webserver         from 'gulp-webserver';
+import zip               from 'gulp-zip';
+import rename            from 'gulp-rename';
+import template          from 'gulp-template';
+import yargs             from 'yargs';
+import path              from 'path';
+import fs                from 'fs';
+import archiver          from 'archiver';
+import jsforce           from 'jsforce'
+import { inject, cap }   from './gulp/component';
+import log               from './gulp/log';
 import DeploymentService from './gulp/deploy';
 
-/* Run server */
-gulp.task('webserver', function() {
+
+gulp.task('serve', function() {
   gulp.src('dest')
     .pipe(webserver({
       livereload: true,
@@ -24,6 +25,7 @@ gulp.task('webserver', function() {
       https: true
     }));
 });
+
 
 gulp.task('component', () => {
   const name = yargs.argv.name;
@@ -45,13 +47,21 @@ gulp.task('component', () => {
   )
 });
 
-gulp.task('zip', function() {
-  let srv = new DeploymentService( fs, archiver, log );
+
+gulp.task('deploy', function() {
+  const srv = new DeploymentService( fs, archiver, jsforce, log );
   srv.createFolderStructure()
-    .then( srv.zipBundles )
-    .then( srv.zipNewPackage )
-    .then( srv.removeFolderStructure )
+    .then( () => srv.zipBundles() )
+    .then( () => srv.zipNewPackage() )
+    .then( () => { 
+      return ( yargs.argv.login && yargs.argv.pass && (yargs.argv.env || 'sb'))
+        ? srv.deploy(argv.login, argv.pass) 
+        : null
+    })
+    .then( () => { srv.removeFolderStructure() } )
+    .catch( log )
 });
 
+
 /* Run server on default */
-gulp.task('default', [ 'webserver']);
+gulp.task('default', [ 'serve']);

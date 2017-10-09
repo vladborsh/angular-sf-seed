@@ -18,6 +18,6 @@ module.exports = {
   stats: {
     colors: true
   },
-  plugins: [],
+  plugins: [new HtmlWebpackPlugin()],
   devtool: 'source-map'
 };

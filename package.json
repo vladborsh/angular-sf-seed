@@ -32,6 +32,7 @@
     "html-webpack-plugin": "^2.30.1",
     "jasmine": "^2.8.0",
     "jasmine-core": "^2.8.0",
+    "jsforce": "^1.8.0",
     "karma": "^1.7.1",
     "karma-chrome-launcher": "^0.2.0",
     "karma-commonjs": "^1.0.0",

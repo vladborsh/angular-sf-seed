@@ -79,10 +79,7 @@ class DeploymentService {
       archive
         .directory( src )
         .finalize();
-      output.on('close', () => {
-        this.log( 'archiver has been finalized' );
-        resolve();
-      });
+      output.on( 'close', resolve );
       archive.on( 'error', this.log );
     });
   }
@@ -90,7 +87,7 @@ class DeploymentService {
 
   zipBundles() {
     return new Promise ( (resolve, reject) => {
-      zipArch( './dest', './package/staticresources/bundles.resource' )
+      this.zipArch( './dest', './package/staticresources/bundles.resource' )
         .then( resolve )
         .catch( reject )
     });
@@ -99,19 +96,19 @@ class DeploymentService {
 
   zipNewPackage() {
     return new Promise ( (resolve, reject) => {
-      zipArch( './package', './deployable.zip' )
+      this.zipArch( './package', './deployable.zip' )
         .then( resolve )
         .catch( reject )
     });
   }
 
 
-  deploywebpack( username, pass ) {
+  deploy( username, pass, env ) {
     return new Promise ( (resolve, reject) => {
-      login()
+      this.login( username, pass, env )
         .then(
           (connection) => {
-            var zipStream = fs.createReadStream("deployment/package.zip");
+            var zipStream = this.fs.createReadStream( './deployable.zip' );
             var asyncLocator = connection.metadata.deploy(zipStream);
             var poll = $interval( () => {
               asyncLocator.check( 
@@ -133,8 +130,10 @@ class DeploymentService {
   }
 
 
-  login() {
-    var connection = new this.jsforce.Connection({loginUrl : 'https://test.salesforce.com'});
+  login( username, pass, env ) {
+    var connection = new this.jsforce.Connection({
+      loginUrl : ((env === 'sb') ? 'https://test.salesforce.com' : 'https://login.salesforce.com')
+    });
     return new Promise( (resolve, reject ) => {
       connection.login(username, pass, function(err, userInfo) {
         if (err) { 
