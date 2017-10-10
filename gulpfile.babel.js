@@ -11,6 +11,9 @@ import jsforce           from 'jsforce'
 import { inject, cap }   from './gulp/component';
 import log               from './gulp/log';
 import DeploymentService from './gulp/deploy';
+import UtilService       from './gulp/util';
+import deployConfigSb    from './config/deploy.sb';
+import deployConfigProd  from './config/deploy.prod';
 
 
 gulp.task('serve', function() {
@@ -29,36 +32,41 @@ gulp.task('serve', function() {
 
 gulp.task('component', () => {
   const name = yargs.argv.name;
-  const parentPath = yargs.argv.parent || '';
-  const destPath = path.join('public/components', parentPath, name);
   inject(name)
   .then(
     () => {
       return gulp.src(path.join(__dirname, '', 'generator/component/**/*.**'))
-        .pipe(template({
-          name: name,
-          upCaseName: cap(name)
-        }))
+        .pipe(
+          template({ name: name, upName: cap(name) })
+        )
         .pipe(rename((path) => {
           path.basename = path.basename.replace('seed', name);
         }))
-        .pipe(gulp.dest(destPath));
+        .pipe(gulp.dest( path.join('public/components', (yargs.argv.parent || ''), name) ));
     }
   )
 });
 
 
-gulp.task('deploy', function() {
-  const srv = new DeploymentService( fs, archiver, jsforce, log );
-  srv.createFolderStructure()
-    .then( () => srv.zipBundles() )
-    .then( () => srv.zipNewPackage() )
+gulp.task('deploy', () => {
+  const deploySrv = new DeploymentService( fs, archiver, jsforce, log );
+  const utilSrv = new UtilService( fs, archiver, jsforce, log );
+  utilSrv.createFolderStructure()
+    .then( () => utilSrv.zipBundles() )
+    .then( () => utilSrv.zipNewPackage() )
     .then( () => { 
-      return ( yargs.argv.login && yargs.argv.pass && (yargs.argv.env || 'sb'))
-        ? srv.deploy(argv.login, argv.pass) 
-        : null
+      if ( yargs.argv.username && yargs.argv.password && (yargs.argv.env || 'sb')) {
+        return deploySrv.deploy( yargs.argv.username, yargs.argv.password) 
+      } else {
+        const config = ((yargs.argv.env || 'sb') == 'sb') ? deployConfigSb : deployConfigProd;
+        if ( config.username && config.password ) {
+          return deploySrv.deploy( config.username, config.password) 
+        } else {
+          return null;
+        }
+      }
     })
-    .then( () => { srv.removeFolderStructure() } )
+    .then( () => { utilSrv.removeFolderStructure() } )
     .catch( log )
 });
 

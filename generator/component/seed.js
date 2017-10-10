@@ -1,8 +1,8 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
-import <%= upCaseName %>Component from './<%= name %>.component';
+import <%= upName %>Component from './<%= name %>.component';
 
-let <%= upCaseName %>Module = angular.module('<%= name %>', [
+let <%= upName %>Module = angular.module('<%= name %>', [
   uiRouter
 ])
 .config(
@@ -15,7 +15,7 @@ let <%= upCaseName %>Module = angular.module('<%= name %>', [
     });
   }
 )
-.component('<%= name %>', <%= upCaseName %>Component)
+.component('<%= name %>', <%= upName %>Component)
 .name;
 
-export default <%= upCaseName %>Module;
+export default <%= upName %>Module;

@@ -11,7 +11,7 @@ export function inject (name) {
   }
   const handle = content => {
     return new Promise ( ( resolve, reject ) => {
-      let newContent = content.replace(']);', ` ${cap(name)} ,\n]);`)
+      let newContent = content.replace(']).name', ` ${cap(name)} ,\n]).name`)
       let importIndex = newContent.lastIndexOf(`import angular from 'angular';`)
       newContent = [
         newContent.slice(0, importIndex), 

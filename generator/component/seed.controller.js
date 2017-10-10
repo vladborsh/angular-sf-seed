@@ -1,14 +1,14 @@
 /**
- * <%= upCaseName %> Controller does some sick stuff
+ * <%= upName %> Controller does some stuff
  */
-class <%= upCaseName %>Controller {
+class <%= upName %>Controller {
   
   constructor() {
     this.init();
   }
 
   /**
-   * <%= upCaseName %> Controller initialization util method
+   * <%= upName %> Controller initialization util method
    */
   init() {
 
@@ -16,7 +16,7 @@ class <%= upCaseName %>Controller {
 
 }
 
-<%= upCaseName %>Controller.$inject = [];
+<%= upName %>Controller.$inject = [];
 
-export default <%= upCaseName %>Controller
+export default <%= upName %>Controller
 

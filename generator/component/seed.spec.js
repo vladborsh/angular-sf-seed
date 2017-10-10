@@ -1,16 +1,16 @@
-import <%= upCaseName %>Module from './<%= name %>';
-import <%= upCaseName %>Controller from './<%= name %>.controller';
-import <%= upCaseName %>Component from './<%= name %>.component';
-import <%= upCaseName %>Template from './<%= name %>.html';
+import <%= upName %>Module from './<%= name %>';
+import <%= upName %>Controller from './<%= name %>.controller';
+import <%= upName %>Component from './<%= name %>.component';
+import <%= upName %>Template from './<%= name %>.html';
 
-describe('<%= upCaseName %>', () => {
+describe('<%= upName %>', () => {
   let $rootScope, makeController;
 
-  beforeEach(window.module(<%= upCaseName %>Module));
+  beforeEach(window.module(<%= upName %>Module));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {
-      return new <%= upCaseName %>Controller();
+      return new <%= upName %>Controller();
     };
   }));
 
@@ -25,12 +25,12 @@ describe('<%= upCaseName %>', () => {
   });
 
   describe('Component', () => {
-    let component = <%= upCaseName %>Component;
+    let component = <%= upName %>Component;
     it('includes the intended template', () => {
-      expect(component.template).toEqual(<%= upCaseName %>Template);
+      expect(component.template).toEqual(<%= upName %>Template);
     });
     it('invokes the right controller', () => {
-      expect(component.controller).toEqual(<%= upCaseName %>Controller);
+      expect(component.controller).toEqual(<%= upName %>Controller);
     });
   });
 });
