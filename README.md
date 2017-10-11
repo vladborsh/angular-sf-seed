@@ -4,7 +4,7 @@ Another one light starter for scalable Angular 1.x application based on ES6 clas
 
 ## Description
 
-Starter provides scalable component-based AngularJS project structure and the [best practice](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md) in directory organization for Angular. It supports ES6 standards and consumes components as classes. Starter uses Webpack as bundler and Gulp as task runner. 
+Starter provides scalable component-based AngularJS project structure and follow the [best practice](https://github.com/johnpapa/angular-styleguide/blob/master/a1/README.md) in directory organization for Angular. It supports ES6 standards and consumes components as classes. Starter uses Webpack as bundler and Gulp as task runner. 
 
 ## Features
 
