@@ -2,15 +2,17 @@ import ProductModule from './product';
 import ProductController from './product.controller';
 import ProductComponent from './product.component';
 import ProductTemplate from './product.html';
+import SfService from '../../commons/sf.service';
 
 describe('Product', () => {
-  let $rootScope, makeController;
+  let $rootScope, $q, makeController;
 
   beforeEach(window.module(ProductModule));
-  beforeEach(inject((_$rootScope_) => {
+  beforeEach(inject((_$rootScope_, _$q_ ) => {
     $rootScope = _$rootScope_;
+    $q = _$q_;
     makeController = () => {
-      return new ProductController();
+      return new ProductController( new SfService($q) );
     };
   }));
 
