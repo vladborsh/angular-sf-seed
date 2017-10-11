@@ -1,6 +1,6 @@
 # AngularJS starter for Salesforce
 
-Another one easy to use a starter for scalable Angular 1.x application based on ES6 classes and components with suport deployment in the Salesforce.
+Another one light starter for scalable Angular 1.x application based on ES6 classes and components with suport deployment in the Salesforce.
 
 ## Description
 
