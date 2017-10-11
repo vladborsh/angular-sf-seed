@@ -20,7 +20,7 @@ Starter provides scalable component-based AngularJS project structure and the [b
 
 ### Structure
 
-We use component-based approach for scaling and separating by concerns. Domain related components by default placed in `public/components` folder.  Visualforce remoting wrapper is in `public//commons` folder. Ideally, the whole application should be a tree of components that implement clearly defined inputs and outputs and minimize two-way data binding. 
+We use component-based approach for scaling and separating by concerns. Domain related components by default placed in `public/components` folder.  Visualforce remoting wrapper is in `public/commons` folder. Ideally, the whole application should be a tree of components that implement clearly defined inputs and outputs and minimize two-way data binding. 
 Tests also support ES6 classes. Testing framework - [Jasmine](https://github.com/jasmine/jasmine/wiki). Test launcher - Karma Chrome
 
 ### Installation
@@ -32,6 +32,28 @@ Tests also support ES6 classes. Testing framework - [Jasmine](https://github.com
 ### Running app
 
 All bundles will be placed in dist folder. Run `npm run webpack` then `npm run serve`.
+Visualforce sample for localy served bundle:
+```html
+<apex:page sidebar="false" showHeader="false" Controller="ProductController">
+    <head>
+        <apex:includeScript value="http://localhost:8000/app.bundle.js"/>
+    </head>
+    <body ng-app="App">
+        <app></app>
+    </body>
+</apex:page>
+```
+Visualforce sample for deployed bundle:
+```html
+<apex:page sidebar="false" showHeader="false" Controller="ProductController">
+    <head>
+        <apex:includeScript value="{!URLFOR($Resource.bundles, 'app.bundle.js')}"/>
+    </head>
+    <body ng-app="App">
+        <app></app>
+    </body>
+</apex:page>
+```
 
 ### Deployment 
 
@@ -48,3 +70,11 @@ Deploy runner consumes password and username from command arguments and also fro
 * `npm run deploy -- --username ***** --password ******` - run deploy in sandbox
 * `npm run deploy -- --env prod` - run deploy in production use config
 * `npm run deploy` - run deploy in sandbox use config
+
+## TODO
+
+* Add support of Webpack hot module replacement (Run browaersync with webpack meddleware)
+* Add unit test reports
+* Add ES6 linter
+* Add component replacement command
+* Add service and factories generation
