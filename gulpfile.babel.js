@@ -6,7 +6,7 @@ import template          from 'gulp-template';
 import yargs             from 'yargs';
 import path              from 'path';
 import fs                from 'fs';
-import archiver          from 'archiver';
+import vfs               from 'vinyl-fs';
 import jsforce           from 'jsforce'
 import { inject, cap }   from './gulp/component';
 import log               from './gulp/log';
@@ -49,8 +49,8 @@ gulp.task('component', () => {
 
 
 gulp.task('deploy', () => {
-  const deploySrv = new DeploymentService( fs, archiver, jsforce, log );
-  const utilSrv = new UtilService( fs, archiver, jsforce, log );
+  const utilSrv = new UtilService( fs, jsforce, vfs, zip, log );
+  const deploySrv = new DeploymentService( fs, jsforce, utilSrv, log );
   utilSrv.createFolderStructure()
     .then( () => utilSrv.zipBundles() )
     .then( () => utilSrv.zipNewPackage() )
@@ -66,7 +66,6 @@ gulp.task('deploy', () => {
         }
       }
     })
-    .then( () => { utilSrv.removeFolderStructure() } )
     .catch( log )
 });
 

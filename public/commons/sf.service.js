@@ -1,9 +1,11 @@
 class SfService {
 
-  constructor( $q ) {}
+  constructor( $q ) {
+    this._$q = $q;
+  }
 
   do( methodName ) {
-    const deffered = $q.defer();
+    const deffered = this._$q.defer();
     let args = [ methodName ];
     for (let i = 1; i < arguments.length; i++) args.push(arguments[i]);
     args.push(

@@ -44,6 +44,8 @@
     "raw-loader": "^0.5.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.12.2",
+    "through2": "^2.0.3",
+    "vinyl-fs": "^2.4.4",
     "webpack": "^3.6.0",
     "yargs": "^9.0.1"
   },

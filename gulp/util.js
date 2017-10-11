@@ -1,9 +1,10 @@
 class UtilService {
 
-  constructor( fs, archiver, jsforce, log ) {
+  constructor( fs, jsforce, vfs, zip, log ) {
     this.fs = fs;
-    this.archiver = archiver;
     this.jsforce = jsforce;
+    this.vfs = vfs;
+    this.zip = zip;
     this.log = log;
   }
 
@@ -11,20 +12,26 @@ class UtilService {
   createFolderStructure() {
     return new Promise ( ( mainResolve, mainReject ) => {
       this.fs.mkdir('./package', (err, result) => {
-        this.fs.mkdir('./package/staticresources', (err, result) => {
-          let promises = [];
-          promises.push( 
-            new Promise( ( resolve, reject ) => {
-              this.fs.writeFile( './package/staticresources/bundles.resource', '', (err) => {
-                resolve();
-              }); 
-            })
-          );
-          promises.push( this.copyFile( './gulp/templates/package.xml', './package/package.xml' ) );
-          promises.push( this.copyFile( './gulp/templates/bundles.resource-meta.xml', './package/staticresources/bundles.resource-meta.xml' ) );
-          Promise.all(promises)
-            .then( mainResolve )
-            .catch( this.log );
+        this.fs.mkdir('./package/new', (err, result) => {
+          this.fs.mkdir('./package/new/staticresources', (err, result) => {
+            let promises = [];
+            promises.push( 
+              new Promise( ( resolve, reject ) => {
+                this.fs.writeFile( './package/new/staticresources/bundles.resource', '', (err) => {
+                  resolve();
+                }); 
+              })
+            );
+            promises.push( this.copyFile( 
+              './gulp/templates/package.xml', 
+              './package/new/package.xml' ) );
+            promises.push( this.copyFile( 
+              './gulp/templates/bundles.resource-meta.xml', 
+              './package/new/staticresources/bundles.resource-meta.xml' ) );
+            Promise.all(promises)
+              .then( mainResolve )
+              .catch( this.log );
+          });
         });
       });
     });
@@ -54,7 +61,6 @@ class UtilService {
       if (this.fs.existsSync(path)) {
         this.fs.readdirSync(path).forEach((file, index) => {
           let curPath = `${path}/${file}`;
-          this.log(`${path}/${file}`)
           if (this.fs.lstatSync(curPath).isDirectory()) { // recurse
             deleteFolderRecursive(curPath);
           } else { // delete file
@@ -65,48 +71,33 @@ class UtilService {
       }
     };
     if (!src) {
-      this.fs.unlinkSync( './deployable.zip', (err) => {
-        deleteFolderRecursive( './package' )
-      });
+      deleteFolderRecursive( './package' )
+      this.fs.unlinkSync( './package.zip' );
     } else {
       deleteFolderRecursive( src )
-    }
-    
-  }
-
-
-  zipArch( src, dest ) {
-    return new Promise ( (resolve, reject) => {
-      let output = this.fs.createWriteStream( dest );
-      let archive = this.archiver('zip', {
-        zlib: { level: 9 } // Sets the compression level.
-      });
-      archive.pipe(output);
-      archive
-        .directory( src )
-        .finalize();
-      output.on( 'close', resolve );
-      archive.on( 'error', this.log );
-    });
+    } 
   }
 
 
   zipBundles() {
     return new Promise ( (resolve, reject) => {
-      this.zipArch( './dest', './package/staticresources/bundles.resource' )
-        .then( resolve )
-        .catch( reject )
+      this.vfs.src(['./dest/app.bundle.js','./dest/app.bundle.js.map'])
+        .pipe(this.zip('bundles.resource'))
+        .pipe(this.vfs.dest('./package/new/staticresources/'))
+        .on('finish', resolve);
     });
   }
 
 
   zipNewPackage() {
     return new Promise ( (resolve, reject) => {
-      this.zipArch( './package', './deployable.zip' )
-        .then( resolve )
-        .catch( reject )
+      this.vfs.src(['./package/**'])
+        .pipe(this.zip('package.zip'))
+        .pipe(this.vfs.dest('.'))
+        .on('finish', resolve);
     });
   }
+
 }
 
 export default UtilService;

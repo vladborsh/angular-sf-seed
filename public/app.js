@@ -23,6 +23,10 @@ angular.module('App', [
     .state('contact', {
       url: '/contact',
       template: '<contact></contact>'
+    })
+    .state('product', {
+      url: '/',
+      template: '<product></product>'
     });
   }
 )
