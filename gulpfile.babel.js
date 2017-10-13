@@ -55,12 +55,12 @@ gulp.task('deploy', () => {
     .then( () => utilSrv.zipBundles() )
     .then( () => utilSrv.zipNewPackage() )
     .then( () => { 
-      if ( yargs.argv.username && yargs.argv.password && (yargs.argv.env || 'sb')) {
-        return deploySrv.deploy( yargs.argv.username, yargs.argv.password, yargs.argv.env) 
+      if ( yargs.argv.username && yargs.argv.password ) {
+        return deploySrv.deploy( yargs.argv.username, yargs.argv.password, (yargs.argv.env || 'sb')) 
       } else {
         const config = ((yargs.argv.env || 'sb') == 'sb') ? deployConfigSb : deployConfigProd;
         if ( config.username && config.password ) {
-          return deploySrv.deploy( config.username, config.password, yargs.argv.env) 
+          return deploySrv.deploy( config.username, config.password, (yargs.argv.env || 'sb')) 
         } else {
           return null;
         }
