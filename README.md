@@ -36,7 +36,7 @@ Visualforce sample for localy served bundle:
 ```html
 <apex:page sidebar="false" showHeader="false" Controller="ProductController">
     <head>
-        <apex:includeScript value="http://localhost:8000/app.bundle.js"/>
+        <apex:includeScript value="https://localhost:8000/app.bundle.js"/>
     </head>
     <body ng-app="App">
         <app></app>
@@ -62,7 +62,7 @@ Deploy runner consumes password and username from command arguments and also fro
 ## Scripts
 
 * `npm run webpack` - run webpack and watch directory on changes
-* `npm run serve` - run server on localhost 8000
+* `npm run serve --ssl` - run server on localhost 8000
 * `npm test` - run unit tests
 * `npm run component -- --name *****` - create new component. The parameter following the --name flag is the name of the component to be created.
 * `npm run component -- --name ***** --parent ****` - create new component in specified directory
